@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    *{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.content-backdrop{
+    width: 100%;
+    height: 60vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url({{s.restImage.url}}); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.container{
+    width: 85%;
+    margin: auto;
+}
+
+.backdrop-content{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    top:78%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+}
+.backdrop-content img{
+    width: 150px;
+
+}
+
+.backdrop-content h1{
+    font-size: 2rem;
+}
+
+.backdrop-content h2{
+    font-size: 1.4rem;
+}
+
+.detail-section{
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.detail-section aside{
+    border-right: 1px solid black;
+}
+
+.detail-section aside h1{
+    margin-bottom: 1.2rem;
+}
+
+.main-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.main-details .detail-contents{
+    padding: 0.4rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid black;
+}
+
+.main-details .detail-contents:last-child{
+    margin-bottom: 0;
+}
+</style>
+    {% if searched %}
+    <h2>You search for {{searched}}</h2>
+    <section class="main-section">
+        <div class="content-backdrop">
+            {% for s in restaurants %}
+            <div class="backdrop-content container">
+                <img src="{{res.restImage.url}}" alt="">
+                <div class="something">
+                    <h1>{{s.name}}</h1>
+                    <h2>{{s.owner}}</h2>
+                    <h3>{{s.addres}}</h3>
+                    <h5>{{s.opentime}}-{{s.closestime}}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="detail-section container">
+            <aside class="aside">
+                <h1>About Us</h1>
+                <p>{{s.des}}</p>
+            </aside>
+            <div class="main-details">
+                <h1>Menu</h1>
+                    <ul>
+                        <div class="shadow p-3 mb-10 bg-white rounded">
+                   <li class="list" style="text-decoration: none; list-style: none;"></li> 
+                   </div>
+                </ul>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+    {% else %}
+    <h2>Opps! you forgot put something!!</h2>
+    {% endif %}
+    
+    
+    
+   
+    
+{% endblock content %}

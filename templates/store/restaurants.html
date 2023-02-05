@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+      {% block content %}
+
+      <style>
+  
+  .card{
+    margin-top: 20px;
+   
+  }
+  .inner{
+     overflow: hidden;
+
+  }
+  .inner img{
+     transition: all 1.5s ease;
+  }
+  .inner:hover img{
+     transform: scale(1.1);
+  }
+  .res{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+</style>    
+
+
+        
+        <section class="p-5">
+          <header class="text-center">
+            <h2 class=" text-uppercase mb-4">Our partner restaurants</h2>
+          </header>
+          <div class="row">
+          {% if categories %}
+
+            {% for category in categories %}
+
+              <div class="col-md-3 mb-4 mb-md-0 card">
+                <div class="inner">
+                <a class="category-item text-dark" href="{% url 'store:category-products' category.slug %}">
+                  {% if category.category_image %}
+                    <img class="img res" src="{{ category.category_image.url }}" alt="{{ category.title }}">
+                    {% else %}
+                    <img class="img-fluid" src="{% static 'img/cat-img-1.jpg' %}" alt="{{ category.title }}">
+                  {% endif %}
+                  <h4 class="category-item-title">{{category.title }}</h4>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+          {% endif %}
+          </div>
+        </section>
+        <hr>
+
+
+        
+
+
+     
+
+      {% endblock content %}
